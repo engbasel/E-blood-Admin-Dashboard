@@ -2,19 +2,16 @@ import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:path_provider/path_provider.dart';
-
-import 'dart:io';
 import 'package:pdf/widgets.dart' as pw;
 
 class TotalBloodRequestsView extends StatefulWidget {
   const TotalBloodRequestsView({super.key});
 
   @override
-  _TotalBloodRequestsViewState createState() => _TotalBloodRequestsViewState();
+  TotalBloodRequestsViewState createState() => TotalBloodRequestsViewState();
 }
 
-class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
+class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
   String searchQuery = "";
 
   @override
@@ -101,7 +98,7 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
       final requestData = doc.data() as Map<String, dynamic>;
       final patientName = requestData['patientName']?.toLowerCase() ?? '';
       final bloodType = requestData['bloodType']?.toLowerCase() ?? '';
-      final city = requestData['city']?.toLowerCase() ?? '';
+      final city = requestData['address']?.toLowerCase() ?? '';
       return patientName.contains(searchQuery) ||
           bloodType.contains(searchQuery) ||
           city.contains(searchQuery);
@@ -139,7 +136,8 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
         ),
         subtitle: Text(
           'Blood Type: ${requestData['bloodType'] ?? 'Unknown'}\n'
-          'City: ${requestData['city'] ?? 'Unknown'}',
+          'City: ${requestData['address'] ?? 'Unknown'}\n'
+          'Status: ${requestData['status'] ?? 'Unknown'}',
           style: const TextStyle(color: Colors.black54),
         ),
         onTap: () => _showRequestDetailsDialog(context, request, requestData),
@@ -148,9 +146,15 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
           children: [
             IconButton(
               icon: const Icon(Icons.check, color: Colors.green),
-              onPressed: () {
-                // Accept request functionality here
-              },
+              onPressed: () => _updateStatus(request.id, 'accepted'),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.red),
+              onPressed: () => _updateStatus(request.id, 'rejected'),
+            ),
+            IconButton(
+              icon: const Icon(Icons.pending, color: Colors.red),
+              onPressed: () => _updateStatus(request.id, 'pending'),
             ),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
@@ -174,8 +178,9 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
               children: [
                 Text('Address: ${requestData['address'] ?? 'N/A'}'),
                 Text('Blood Type: ${requestData['bloodType'] ?? 'Unknown'}'),
-                Text('City: ${requestData['city'] ?? 'Unknown'}'),
-                Text('Contact Number: ${requestData['phoneNumber'] ?? 'N/A'}'),
+                Text('City: ${requestData['address'] ?? 'Unknown'}'),
+                Text('Contact Number: ${requestData['contact'] ?? 'N/A'}'),
+                Text('Status: ${requestData['status'] ?? 'Unknown'}'),
               ],
             ),
           ),
@@ -193,9 +198,16 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
     );
   }
 
+  Future<void> _updateStatus(String requestId, String newStatus) async {
+    await FirebaseFirestore.instance
+        .collection('neederRequest')
+        .doc(requestId)
+        .update({'status': newStatus});
+  }
+
   Future<void> _deleteRequest(String requestId) async {
     await FirebaseFirestore.instance
-        .collection('blood_requstes_users')
+        .collection('neederRequest')
         .doc(requestId)
         .delete();
   }
@@ -216,14 +228,15 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
           return pw.Column(
             children: [
               pw.Header(level: 0, child: pw.Text('Blood Requests Report')),
-              pw.Table.fromTextArray(
+              pw.TableHelper.fromTextArray(
                 context: context,
                 data: <List<String>>[
                   <String>[
                     'Patient Name',
                     'Blood Type',
                     'City',
-                    'Contact Number'
+                    'Contact Number',
+                    'Status'
                   ],
                   ...querySnapshot.docs.map((doc) {
                     final data = doc.data();
@@ -231,7 +244,8 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
                       data['patientName'] ?? 'Unknown',
                       data['bloodType'] ?? 'Unknown',
                       data['address'] ?? 'Unknown',
-                      data['age'] ?? 'N/A',
+                      data['contact']?.toString() ?? 'N/A',
+                      data['status'] ?? 'Unknown',
                     ];
                   }),
                 ],
@@ -249,7 +263,7 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
       ext: 'pdf',
       mimeType: MimeType.pdf,
     );
-
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('PDF saved successfully'),
