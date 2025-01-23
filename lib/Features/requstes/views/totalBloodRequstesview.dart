@@ -1,11 +1,7 @@
 import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
-import 'package:file_saver/file_saver.dart';
+import 'package:adminbloodv2/genratPDF.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:path_provider/path_provider.dart';
-
-import 'dart:io';
-import 'package:pdf/widgets.dart' as pw;
 
 class TotalBloodRequestsView extends StatefulWidget {
   const TotalBloodRequestsView({super.key});
@@ -16,84 +12,6 @@ class TotalBloodRequestsView extends StatefulWidget {
 
 class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
   String searchQuery = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.picture_as_pdf),
-            onPressed: _generatePDF,
-          ),
-        ],
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-        ),
-        backgroundColor: ColorsManager.backgroundColor,
-        title: const Text(
-          'Total Blood Requests',
-          style: TextStyle(color: ColorsManager.whiteBackgroundColor),
-        ),
-      ),
-      body: Column(
-        children: [
-          _buildSearchBar(),
-          Expanded(
-            child: _buildBloodRequestsList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        onChanged: (value) => setState(() => searchQuery = value.toLowerCase()),
-        decoration: InputDecoration(
-          labelText: 'Search by name, blood type, or city',
-          prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBloodRequestsList() {
-    return StreamBuilder<QuerySnapshot>(
-      stream:
-          FirebaseFirestore.instance.collection('neederRequest').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(child: Text("No blood requests available"));
-        }
-
-        final filteredDocs = _filterRequests(snapshot.data!.docs);
-
-        return Column(
-          children: [
-            _buildTotalRequestsCard(filteredDocs.length),
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredDocs.length,
-                itemBuilder: (context, index) {
-                  var request = filteredDocs[index];
-                  var requestData = request.data() as Map<String, dynamic>;
-                  return _buildRequestCard(request, requestData);
-                },
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   List<QueryDocumentSnapshot> _filterRequests(
       List<QueryDocumentSnapshot> docs) {
@@ -205,57 +123,103 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
     // Implement the logic for editing the request here
   }
 
-  Future<void> _generatePDF() async {
-    final querySnapshot =
-        await FirebaseFirestore.instance.collection('neederRequest').get();
-    final pdf = pw.Document();
+  Widget _buildBloodRequestsList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream:
+          FirebaseFirestore.instance.collection('neederRequest').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(child: Text("No blood requests available"));
+        }
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) {
-          return pw.Column(
-            children: [
-              pw.Header(level: 0, child: pw.Text('Blood Requests Report')),
-              pw.Table.fromTextArray(
-                context: context,
-                data: <List<String>>[
-                  <String>[
-                    'Patient Name',
-                    'Blood Type',
-                    'City',
-                    'Contact Number',
-                    'Age' // Add this if you want to include age in the report
-                  ],
-                  ...querySnapshot.docs.map((doc) {
-                    final data = doc.data();
-                    return [
-                      data['patientName']?.toString() ?? 'Unknown',
-                      data['bloodType']?.toString() ?? 'Unknown',
-                      data['city']?.toString() ?? 'Unknown',
-                      data['phoneNumber']?.toString() ?? 'N/A',
-                      data['address']?.toString() ??
-                          'N/A', // Convert age to String
-                    ];
-                  }),
-                ],
+        // If data is available, build the list
+        final filteredDocs = _filterRequests(snapshot.data!.docs);
+
+        return Column(
+          children: [
+            _buildTotalRequestsCard(filteredDocs.length),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filteredDocs.length,
+                itemBuilder: (context, index) {
+                  var request = filteredDocs[index];
+                  var requestData = request.data() as Map<String, dynamic>;
+                  return _buildRequestCard(request, requestData);
+                },
               ),
-            ],
-          );
-        },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        onChanged: (value) => setState(() => searchQuery = value.toLowerCase()),
+        decoration: InputDecoration(
+          labelText: 'Search by name, blood type, or city',
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
       ),
     );
+  }
 
-    final bytes = await pdf.save();
-    await FileSaver.instance.saveFile(
-      name: 'blood_requests_report.pdf',
-      bytes: bytes,
-      ext: 'pdf',
-      mimeType: MimeType.pdf,
+  Future<void> _generatePDF(BuildContext context) async {
+    await PdfGenerator.generatePdf(
+      collectionName: 'neederRequest',
+      headers: [
+        'اسم المريض',
+        'نوع الفصيلة',
+        'المدينة',
+        'رقم تواصل',
+        'العنوان',
+      ],
+      fields: [
+        'patientName',
+        'bloodType',
+        'city',
+        'phoneNumber',
+        'address',
+      ],
+      fileName: 'تقرير اجمالي طلبات الدم.pdf',
+      context: context,
     );
+  }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('PDF saved successfully'),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.picture_as_pdf),
+            onPressed: () => _generatePDF(context),
+          ),
+        ],
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        backgroundColor: ColorsManager.backgroundColor,
+        title: const Text(
+          'اجمالي تبرعات الدم',
+          style: TextStyle(color: ColorsManager.whiteBackgroundColor),
+        ),
+      ),
+      body: Column(
+        children: [
+          _buildSearchBar(),
+          Expanded(
+            child: _buildBloodRequestsList(),
+          ),
+        ],
       ),
     );
   }

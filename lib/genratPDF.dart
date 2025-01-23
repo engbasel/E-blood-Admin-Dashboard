@@ -1,135 +1,179 @@
-// import 'package:pdf/pdf.dart';
-// import 'package:pdf/widgets.dart' as pw;
-// import 'package:printing/printing.dart';
+// import 'package:file_saver/file_saver.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart'; // For rootBundle
+// import 'package:pdf/widgets.dart' as pw;
 
-// Future<void> generateBloodRequestsPDF(
-//   List<QueryDocumentSnapshot> requests,
-// ) async {
-//   final pdf = pw.Document();
+// class PdfGenerator {
+//   // Generate a PDF from Firestore data with Arabic support
+//   static Future<void> generatePdf({
+//     required String collectionName,
+//     required List<String> headers,
+//     required List<String> fields,
+//     required String fileName,
+//     required BuildContext context,
+//   }) async {
+//     final querySnapshot =
+//         await FirebaseFirestore.instance.collection(collectionName).get();
+//     final pdf = pw.Document();
 
-//   // Calculate the total count of requests
-//   final totalRequests = requests.length;
+//     // Load an Arabic font (e.g., Amiri Regular)
+//     final arabicFont =
+//         pw.Font.ttf(await rootBundle.load('assets/fonts/Amiri-Regular.ttf'));
 
-//   // Add content to the PDF
-//   pdf.addPage(
-//     pw.Page(
-//       margin: const pw.EdgeInsets.all(20),
-//       build: (pw.Context context) {
-//         return pw.Directionality(
-//           textDirection: pw.TextDirection.rtl, // Set the entire page to RTL
-//           child: pw.Column(
+//     pdf.addPage(
+//       pw.Page(
+//         build: (pw.Context context) {
+//           return pw.Column(
 //             crossAxisAlignment: pw.CrossAxisAlignment.start,
 //             children: [
-//               // Title
-//               pw.Center(
+//               pw.Header(
+//                 level: 0,
 //                 child: pw.Text(
-//                   'تقرير طلبات الدم',
-//                   style: pw.TextStyle(
-//                     fontSize: 28,
-//                     fontWeight: pw.FontWeight.bold,
-//                     color: PdfColors.red800,
-//                   ),
+//                   _fixArabicText('تقرير طلبات الدم'), // Fix Arabic text
+//                   style: pw.TextStyle(font: arabicFont, fontSize: 24),
 //                 ),
 //               ),
-//               pw.Divider(thickness: 2, color: PdfColors.red800),
 //               pw.SizedBox(height: 20),
-
-//               // Table for requests
-//               pw.Text(
-//                 'تفاصيل الطلبات',
-//                 style: pw.TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: pw.FontWeight.bold,
-//                   color: PdfColors.grey800,
-//                 ),
-//               ),
-//               pw.SizedBox(height: 10),
-
 //               pw.Table.fromTextArray(
-//                 headers: [
-//                   'اسم المريض',
-//                   'فصيلة الدم',
-//                   'المدينة',
-//                   'رقم الاتصال',
-//                   'اسم المرافق',
-//                   'ملاحظات إضافية',
-//                   'المرض',
-//                   'الحالة',
-//                   'السبب',
-//                   'التاريخ',
+//                 context: context,
+//                 columnWidths: {
+//                   for (var i = 0; i < headers.length; i++)
+//                     i: const pw.FlexColumnWidth(1),
+//                 },
+//                 data: <List<String>>[
+//                   headers.map((header) => _fixArabicText(header)).toList(),
+//                   ...querySnapshot.docs.map((doc) {
+//                     final data = doc.data();
+//                     return fields.map((field) {
+//                       return _fixArabicText(data[field]?.toString() ?? 'N/A');
+//                     }).toList();
+//                   }),
 //                 ],
+//                 cellStyle: pw.TextStyle(font: arabicFont, fontSize: 12),
 //                 headerStyle: pw.TextStyle(
+//                   font: arabicFont,
+//                   fontSize: 14,
 //                   fontWeight: pw.FontWeight.bold,
-//                   fontSize: 10,
-//                   color: PdfColors.white,
-//                 ),
-//                 headerDecoration: const pw.BoxDecoration(
-//                   color: PdfColors.red800,
-//                 ),
-//                 cellStyle: const pw.TextStyle(fontSize: 9),
-//                 cellHeight: 25,
-//                 cellAlignment:
-//                     pw.Alignment.centerRight, // Align text to the right
-//                 data: requests.map((request) {
-//                   final data = request.data() as Map<String, dynamic>;
-//                   return [
-//                     data['patientName'] ?? 'N/A',
-//                     data['bloodType'] ?? 'N/A',
-//                     data['location'] ?? 'N/A',
-//                     data['contactNumber'] ?? 'N/A',
-//                     data['accompanyName'] ?? 'N/A',
-//                     data['additionalNotes'] ?? 'N/A',
-//                     data['diseaseName'] ?? 'N/A',
-//                     data['urgent'] ?? 'N/A',
-//                     data['reason'] ?? 'N/A',
-//                     data['timestamp'] != null
-//                         ? (data['timestamp'] as Timestamp?)
-//                                 ?.toDate()
-//                                 .toString() ??
-//                             'N/A'
-//                         : 'N/A',
-//                   ];
-//                 }).toList(),
-//               ),
-
-//               pw.SizedBox(height: 30),
-
-//               // Summary Section
-//               pw.Text(
-//                 'ملخص',
-//                 style: pw.TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: pw.FontWeight.bold,
-//                   color: PdfColors.grey800,
-//                 ),
-//               ),
-//               pw.SizedBox(height: 10),
-//               pw.Container(
-//                 padding: const pw.EdgeInsets.all(10),
-//                 decoration: pw.BoxDecoration(
-//                   color: PdfColors.grey200,
-//                   borderRadius: pw.BorderRadius.circular(5),
-//                 ),
-//                 child: pw.Column(
-//                   crossAxisAlignment: pw.CrossAxisAlignment.start,
-//                   children: [
-//                     pw.Text('إجمالي الطلبات: $totalRequests'),
-//                     pw.Text(
-//                       'الطلبات العاجلة: ${requests.where((request) => (request.data() as Map<String, dynamic>?)?['urgent'] == 'yes').length}',
-//                     ),
-//                   ],
 //                 ),
 //               ),
 //             ],
-//           ),
-//         );
-//       },
-//     ),
-//   );
+//           );
+//         },
+//       ),
+//     );
 
-//   // Save or print the PDF
-//   await Printing.layoutPdf(
-//     onLayout: (PdfPageFormat format) async => pdf.save(),
-//   );
+//     final bytes = await pdf.save();
+//     await FileSaver.instance.saveFile(
+//       name: fileName,
+//       bytes: bytes,
+//       ext: 'pdf',
+//       mimeType: MimeType.pdf,
+//     );
+
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       const SnackBar(
+//         content: Text('تم حفظ ملف PDF بنجاح'),
+//       ),
+//     );
+//   }
+
+//   // Helper function to fix Arabic text rendering issues
+//   static String _fixArabicText(String text) {
+//     // Reverse the text to simulate RTL rendering
+//     return text.split('').reversed.join();
+//   }
 // }
+
+import 'package:file_saver/file_saver.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // For rootBundle
+import 'package:pdf/widgets.dart' as pw;
+
+class PdfGenerator {
+  // Generate a PDF from Firestore data with Arabic support
+  static Future<void> generatePdf({
+    required String collectionName,
+    required List<String> headers,
+    required List<String> fields,
+    required String fileName,
+    required BuildContext context,
+  }) async {
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection(collectionName).get();
+    final pdf = pw.Document();
+
+    // Load an Arabic font (e.g., Amiri Regular)
+    final arabicFont =
+        pw.Font.ttf(await rootBundle.load('assets/fonts/Amiri-Regular.ttf'));
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Directionality(
+              textDirection: pw.TextDirection.rtl,
+              child: pw.Column(
+                crossAxisAlignment:
+                    pw.CrossAxisAlignment.end, // Align to the right
+                children: [
+                  pw.Header(
+                    level: 0,
+                    child: pw.Text(
+                      _fixArabicText('تقرير طلبات الدم'), // Fix Arabic text
+                      style: pw.TextStyle(font: arabicFont, fontSize: 24),
+                    ),
+                  ),
+                  pw.SizedBox(height: 20),
+                  pw.Table.fromTextArray(
+                    context: context,
+                    columnWidths: {
+                      for (var i = 0; i < headers.length; i++)
+                        i: const pw.FlexColumnWidth(1),
+                    },
+                    data: <List<String>>[
+                      headers.map((header) => _fixArabicText(header)).toList(),
+                      ...querySnapshot.docs.map((doc) {
+                        final data = doc.data();
+                        return fields.map((field) {
+                          return _fixArabicText(
+                              data[field]?.toString() ?? 'N/A');
+                        }).toList();
+                      }),
+                    ],
+                    cellStyle: pw.TextStyle(font: arabicFont, fontSize: 12),
+                    headerStyle: pw.TextStyle(
+                      font: arabicFont,
+                      fontSize: 14,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                    defaultColumnWidth: const pw.FlexColumnWidth(1),
+                    tableWidth: pw.TableWidth.max,
+                  ),
+                ],
+              ));
+        },
+      ),
+    );
+
+    final bytes = await pdf.save();
+    await FileSaver.instance.saveFile(
+      name: fileName,
+      bytes: bytes,
+      ext: 'pdf',
+      mimeType: MimeType.pdf,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('تم حفظ ملف PDF بنجاح'),
+      ),
+    );
+  }
+
+  // Helper function to fix Arabic text rendering issues
+  static String _fixArabicText(String text) {
+    // Reverse the text to simulate RTL rendering
+    return text.split('').reversed.join();
+  }
+}
