@@ -1,9 +1,10 @@
 import 'package:adminbloodv2/Core/widgets/buildSummarySection.dart';
 import 'package:adminbloodv2/Features/donners/views/total_pending_requests.dart';
 import 'package:adminbloodv2/Features/donners/views/totale_available_donors_view.dart';
-import 'package:adminbloodv2/Features/requstes/views/totalBloodRequstesview.dart';
 import 'package:adminbloodv2/FirestoreConstants.dart';
 import 'package:flutter/material.dart';
+
+import '../views/total_blood_requstes_view.dart';
 
 class CoustomRequestsDetailsSection extends StatelessWidget {
   const CoustomRequestsDetailsSection({

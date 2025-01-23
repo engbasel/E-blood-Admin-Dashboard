@@ -176,7 +176,6 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text('Address: ${requestData['address'] ?? 'N/A'}'),
                 Text('Blood Type: ${requestData['bloodType'] ?? 'Unknown'}'),
                 Text('City: ${requestData['address'] ?? 'Unknown'}'),
                 Text('Contact Number: ${requestData['contact'] ?? 'N/A'}'),
