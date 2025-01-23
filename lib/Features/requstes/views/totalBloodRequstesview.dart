@@ -223,15 +223,18 @@ class _TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
                     'Patient Name',
                     'Blood Type',
                     'City',
-                    'Contact Number'
+                    'Contact Number',
+                    'Age' // Add this if you want to include age in the report
                   ],
                   ...querySnapshot.docs.map((doc) {
                     final data = doc.data();
                     return [
-                      data['patientName'] ?? 'Unknown',
-                      data['bloodType'] ?? 'Unknown',
-                      data['address'] ?? 'Unknown',
-                      data['age'] ?? 'N/A',
+                      data['patientName']?.toString() ?? 'Unknown',
+                      data['bloodType']?.toString() ?? 'Unknown',
+                      data['city']?.toString() ?? 'Unknown',
+                      data['phoneNumber']?.toString() ?? 'N/A',
+                      data['address']?.toString() ??
+                          'N/A', // Convert age to String
                     ];
                   }),
                 ],
