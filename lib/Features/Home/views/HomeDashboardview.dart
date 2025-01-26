@@ -1,5 +1,4 @@
 import 'package:adminbloodv2/Features/donners/widgets/CoustomDonorsDetailsSection.dart';
-import 'package:adminbloodv2/Features/reports/widgets/CoustomReportsSection.dart';
 import 'package:adminbloodv2/Features/requstes/widgets/CoustomRequestsDetailsSection.dart';
 import 'package:adminbloodv2/Features/users/views/CoustomrUserssDetailsSection.dart';
 
@@ -99,7 +98,8 @@ class HomeDashboardView extends StatelessWidget {
             const SizedBox(height: 20),
             const CoustomDonorsDetailsSection(),
             const SizedBox(height: 20),
-            const Divider(),
+            const Divider(), const SizedBox(height: 20),
+
             Text(
               'users_info'.tr(),
               style: const TextStyle(
@@ -107,18 +107,22 @@ class HomeDashboardView extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 20),
+
+            const SizedBox(height: 20),
             const CoustomrUserssDetailsSection(),
+            const SizedBox(height: 20),
             const Divider(),
             const SizedBox(height: 20),
-            Text(
-              'reports'.tr(),
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const ReportsChartsSection(),
+            // Text(
+            //   'reports'.tr(),
+            //   style: const TextStyle(
+            //     fontSize: 22,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
+            // const ReportsChartsSection(),
           ],
         ),
       ),
