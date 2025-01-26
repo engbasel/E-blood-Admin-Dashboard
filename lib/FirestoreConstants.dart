@@ -1,5 +1,5 @@
 class FirestoreConstants {
-  static const String bloodRequestsCollection = 'blood_requests';
+  static const String bloodRequestsCollection = 'neederRequest';
   static const String donorRequestsCollection = 'donerRequest';
   static const String verifiedDonorsCollection = 'donerRequest';
   static const String rejectedDonorsCollection = 'rejected_donors';
