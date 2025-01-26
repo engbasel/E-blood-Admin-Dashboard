@@ -1,6 +1,8 @@
 import 'package:adminbloodv2/Features/donners/widgets/CoustomDonorsDetailsSection.dart';
 import 'package:adminbloodv2/Features/reports/widgets/CoustomReportsSection.dart';
 import 'package:adminbloodv2/Features/requstes/widgets/CoustomRequestsDetailsSection.dart';
+import 'package:adminbloodv2/Features/users/views/CoustomrUserssDetailsSection.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -97,6 +99,15 @@ class HomeDashboardView extends StatelessWidget {
             const SizedBox(height: 20),
             const CoustomDonorsDetailsSection(),
             const SizedBox(height: 20),
+            const Divider(),
+            Text(
+              'users_info'.tr(),
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const CoustomrUserssDetailsSection(),
             const Divider(),
             const SizedBox(height: 20),
             Text(
