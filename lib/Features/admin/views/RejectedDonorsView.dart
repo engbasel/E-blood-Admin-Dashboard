@@ -3,8 +3,8 @@ import 'package:adminbloodv2/Features/admin/widgets/UserDetailsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class BlockedDonorsView extends StatelessWidget {
-  const BlockedDonorsView({super.key});
+class BlockeUSersView extends StatelessWidget {
+  const BlockeUSersView({super.key});
 
   @override
   Widget build(BuildContext context) {

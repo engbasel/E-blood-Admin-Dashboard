@@ -48,7 +48,7 @@ class CoustomrUserssDetailsSection extends StatelessWidget {
             () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return const BlockedDonorsView();
+                  return const BlockeUSersView();
                 },
               ));
             },

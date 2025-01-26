@@ -7,6 +7,8 @@
   "requests_details": "Requests Details",
   "donors_details": "Donors Details",
   "reports": "Reports",
+  "all_donors": "All Donors",
+  "donors_blocked": "Donors Blocked",
   "users_info": " Users Info",
   "total_blood_requests": "Total Blood Requests",
   "pending_donation_requests": "Pending Donation Requests",
