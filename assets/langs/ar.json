@@ -6,5 +6,12 @@
   "settings": "الإعدادات",
   "requests_details": "تفاصيل الطلبات",
   "donors_details": "تفاصيل المتبرعين",
-  "reports": "التقارير"
+  "reports": "التقارير",
+  "total_blood_requests": "إجمالي طلبات الدم",
+  "pending_donation_requests": "طلبات التبرع المعلقة",
+  "verified_donors_list": "قائمة المتبرعين المعتمدين",
+  "user_accounts": "حسابات المستخدمين",
+  "change_user_status": "تغيير حالة المستخدم",
+  "blocked_users": "المستخدمون المحظورون",
+  "allowed_users": "المستخدمون المسموح لهم"
 }

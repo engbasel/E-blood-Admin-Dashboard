@@ -6,5 +6,12 @@
   "settings": "Settings",
   "requests_details": "Requests Details",
   "donors_details": "Donors Details",
-  "reports": "Reports"
+  "reports": "Reports",
+  "total_blood_requests": "Total Blood Requests",
+  "pending_donation_requests": "Pending Donation Requests",
+  "verified_donors_list": "Verified Donors List",
+  "user_accounts": "User Accounts",
+  "change_user_status": "Change User Status",
+  "blocked_users": "Blocked Users",
+  "allowed_users": "Allowed Users"
 }

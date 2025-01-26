@@ -2,6 +2,7 @@ import 'package:adminbloodv2/Core/widgets/buildSummarySection.dart';
 import 'package:adminbloodv2/Features/donners/views/total_pending_requests.dart';
 import 'package:adminbloodv2/Features/donners/views/totale_available_donors_view.dart';
 import 'package:adminbloodv2/FirestoreConstants.dart';
+import 'package:easy_localization/easy_localization.dart'; // Import EasyLocalization
 import 'package:flutter/material.dart';
 
 import '../views/total_blood_requstes_view.dart';
@@ -20,7 +21,7 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
         children: [
           buildSummarySection(
             context,
-            'Total Blood Requests',
+            'total_blood_requests'.tr(), // Localized key
             FirestoreConstants.bloodRequestsCollection,
             () {
               Navigator.push(
@@ -35,7 +36,7 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
           ),
           buildSummarySection(
             context,
-            'Pending Donation Requests',
+            'pending_donation_requests'.tr(), // Localized key
             FirestoreConstants.donorRequestsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
@@ -47,7 +48,7 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
           ),
           buildSummarySection(
             context,
-            'Verified Donors List',
+            'verified_donors_list'.tr(), // Localized key
             FirestoreConstants.verifiedDonorsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(

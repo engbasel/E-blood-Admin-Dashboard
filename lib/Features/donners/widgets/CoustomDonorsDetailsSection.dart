@@ -4,6 +4,7 @@ import 'package:adminbloodv2/Features/admin/views/RejectedDonorsView.dart';
 import 'package:adminbloodv2/Features/admin/views/allowedUsersview.dart';
 import 'package:adminbloodv2/Features/users/views/CurrerntUsersAccount.dart';
 import 'package:adminbloodv2/FirestoreConstants.dart';
+import 'package:easy_localization/easy_localization.dart'; // Import EasyLocalization
 import 'package:flutter/material.dart';
 
 class CoustomDonorsDetailsSection extends StatelessWidget {
@@ -20,7 +21,7 @@ class CoustomDonorsDetailsSection extends StatelessWidget {
         children: [
           buildSummarySection(
             context,
-            'User Accounts',
+            'user_accounts'.tr(), // Localized key
             FirestoreConstants.userAccountsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
@@ -32,7 +33,7 @@ class CoustomDonorsDetailsSection extends StatelessWidget {
           ),
           buildSummarySection(
             context,
-            'Change User Status',
+            'change_user_status'.tr(), // Localized key
             FirestoreConstants.adminControlCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
@@ -44,7 +45,7 @@ class CoustomDonorsDetailsSection extends StatelessWidget {
           ),
           buildSummarySection(
             context,
-            'Blocked Users',
+            'blocked_users'.tr(), // Localized key
             FirestoreConstants.rejectedDonorsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
@@ -56,7 +57,7 @@ class CoustomDonorsDetailsSection extends StatelessWidget {
           ),
           buildSummarySection(
             context,
-            'Allowed Users',
+            'allowed_users'.tr(), // Localized key
             FirestoreConstants.rejectedDonorsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
