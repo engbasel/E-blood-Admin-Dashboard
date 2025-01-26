@@ -35,6 +35,7 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
             },
           ),
           buildSummarySection(
+            status: 'pending',
             context,
             'pending_donation_requests'.tr(), // Localized key
             FirestoreConstants.donorRequestsCollection,

@@ -5,11 +5,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adminbloodv2/Core/widgets/CoustomCircularProgressIndicator.dart';
 
 Widget buildSummarySection(
-    BuildContext context, String title, String collection, VoidCallback onTap) {
+  BuildContext context,
+  String title,
+  String collection,
+  VoidCallback onTap, {
+  String? status, // Optional status parameter
+}) {
   return GestureDetector(
     onTap: onTap,
     child: StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection(collection).snapshots(),
+      stream: status != null
+          ? FirebaseFirestore.instance
+              .collection(collection)
+              .where('status',
+                  isEqualTo: status) // Filter by status if provided
+              .snapshots()
+          : FirebaseFirestore.instance
+              .collection(collection)
+              .snapshots(), // No filter
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CoustomCircularProgressIndicator());
