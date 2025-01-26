@@ -9,6 +9,10 @@ void main(List<String> args) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Ensure EasyLocalization is initialized
+  await EasyLocalization.ensureInitialized();
+
   runApp(const BloodAdminApp());
 }
 
@@ -19,13 +23,20 @@ class BloodAdminApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
-      path: 'assets/langs',
-      fallbackLocale: const Locale('en'),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        locale: context.locale,
-        localizationsDelegates: context.localizationDelegates,
-        home: const BloodAdminHome(),
+      path: 'assets/langs', // Path to your translation files
+      fallbackLocale: const Locale('en'), // Fallback locale
+      startLocale: const Locale('ar'), // Set the initial locale to Arabic
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: context.locale, // Use the locale from EasyLocalization
+            localizationsDelegates:
+                context.localizationDelegates, // Pass localizationDelegates
+            supportedLocales: context.supportedLocales, // Pass supportedLocales
+            home: const BloodAdminHome(),
+          );
+        },
       ),
     );
   }

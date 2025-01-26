@@ -22,9 +22,9 @@ class HomeDashboardView extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         elevation: 2,
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(
+        title: Text(
+          'dashboard_title'.tr(),
+          style: const TextStyle(
             color: ColorsManager.buttonColor,
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -49,19 +49,19 @@ class HomeDashboardView extends StatelessWidget {
                 ),
               ),
             ),
-            buildDrawerItem(Icons.person, 'User Requests', () {
+            buildDrawerItem(Icons.person, 'user_requests'.tr(), () {
               // Add navigation logic if needed
             }),
-            buildDrawerItem(Icons.favorite, 'Pending Donor Requests', () {
+            buildDrawerItem(Icons.favorite, 'pending_donor_requests'.tr(), () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const TotalPendingRequests()));
             }),
-            buildDrawerItem(Icons.report, 'View Reports', () {
+            buildDrawerItem(Icons.report, 'view_reports'.tr(), () {
               // Add navigation logic for reports
             }),
-            buildDrawerItem(Icons.settings, 'Settings', () {
+            buildDrawerItem(Icons.settings, 'settings'.tr(), () {
               // Add navigation logic for settings
             }),
           ],
@@ -76,7 +76,7 @@ class HomeDashboardView extends StatelessWidget {
             const Divider(),
             const SizedBox(height: 20),
             Text(
-              'Requests Details'.tr(),
+              'requests_details'.tr(),
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -84,14 +84,12 @@ class HomeDashboardView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const CoustomRequestsDetailsSection(),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             const Divider(),
             const SizedBox(height: 20),
-            const Text(
-              'Donors Details',
-              style: TextStyle(
+            Text(
+              'donors_details'.tr(),
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -101,15 +99,15 @@ class HomeDashboardView extends StatelessWidget {
             const SizedBox(height: 20),
             const Divider(),
             const SizedBox(height: 20),
-            const Text(
-              'Reports',
-              style: TextStyle(
+            Text(
+              'reports'.tr(),
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 20),
-            const ReportsChartsSection()
+            const ReportsChartsSection(),
           ],
         ),
       ),
