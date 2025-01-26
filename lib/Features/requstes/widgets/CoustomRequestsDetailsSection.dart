@@ -1,6 +1,7 @@
 import 'package:adminbloodv2/Core/widgets/buildSummarySection.dart';
 import 'package:adminbloodv2/Features/donners/views/total_pending_requests.dart';
 import 'package:adminbloodv2/Features/donners/views/totale_available_donors_view.dart';
+import 'package:adminbloodv2/Features/requstes/views/TotalRejectedRequests.dart';
 import 'package:adminbloodv2/FirestoreConstants.dart';
 import 'package:easy_localization/easy_localization.dart'; // Import EasyLocalization
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
             status: 'pending',
             context,
             'pending_donation_requests'.tr(), // Localized key
-            FirestoreConstants.donorRequestsCollection,
+            FirestoreConstants.bloodRequestsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
@@ -48,13 +49,27 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
             },
           ),
           buildSummarySection(
+            status: 'accepted',
             context,
             'verified_donors_list'.tr(), // Localized key
-            FirestoreConstants.verifiedDonorsCollection,
+            FirestoreConstants.bloodRequestsCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   return const TotaleAvailableDonorsView();
+                },
+              ));
+            },
+          ),
+          buildSummarySection(
+            status: 'rejected',
+            context,
+            'total_rejacted_requests'.tr(), // Localized key
+            FirestoreConstants.bloodRequestsCollection,
+            () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const TotalRejectedRequests();
                 },
               ));
             },

@@ -9,7 +9,7 @@ class DonorService {
   // Fetch all donors
   Stream<QuerySnapshot> fetchDonors() {
     return _firestore
-        .collection(FirestoreConstants.donorRequestsCollection)
+        .collection(FirestoreConstants.bloodRequestsCollection)
         .snapshots();
   }
 

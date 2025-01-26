@@ -13,5 +13,6 @@
   "user_accounts": "حسابات المستخدمين",
   "change_user_status": "تغيير حالة المستخدم",
   "blocked_users": "المستخدمون المحظورون",
+  "total_rejacted_requests": "إجمالي الطلبات المرفوضة",
   "allowed_users": "المستخدمون المسموح لهم"
 }

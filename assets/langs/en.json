@@ -13,5 +13,6 @@
   "user_accounts": "User Accounts",
   "change_user_status": "Change User Status",
   "blocked_users": "Blocked Users",
+  "total_rejacted_requests": " Total Requested Rejected",
   "allowed_users": "Allowed Users"
 }
