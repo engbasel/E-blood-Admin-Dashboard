@@ -5,8 +5,6 @@ import 'package:adminbloodv2/Features/users/views/CoustomrUserssDetailsSection.d
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'package:adminbloodv2/Features/donners/views/total_pending_requests.dart';
-
 import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/Features/Home/widgets/buildDrawerItem.dart';
 
@@ -32,14 +30,138 @@ class HomeDashboardView extends StatelessWidget {
           ),
         ),
       ),
+      // drawer: Drawer(
+      //   backgroundColor: Colors.white,
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: ColorsManager.primaryColor,
+      //         ),
+      //         child: Text(
+      //           'Blood Charity Admin',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ),
+      //       buildDrawerItem(Icons.person, 'user_requests'.tr(), () {
+      //         // Add navigation logic if needed
+      //       }),
+      //       buildDrawerItem(Icons.favorite, 'pending_donor_requests'.tr(), () {
+      //         Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //                 builder: (context) => const TotalPendingRequests()));
+      //       }),
+      //       buildDrawerItem(Icons.report, 'view_reports'.tr(), () {
+      //         // Add navigation logic for reports
+      //       }),
+      //       buildDrawerItem(Icons.settings, 'settings'.tr(), () {
+      //         // Add navigation logic for settings
+      //       }),
+      //       const Text(
+      //           'مرحبا بكم جميعا في بيتكم الثاني كلية الهندسة جامعة المنصورة لمناقشة زملاء الغد في مشروعهم'),
+      //       const Text(
+      //           'كل الشكر لجميع الاشخاص الذين شاركوا في انتاج هذا المشروع ونطمح ان يكون نال اعجابكم جميعا و ممتنين لمجهود و ثقة اساتذتنا الاعزاء '),
+      //     ],
+      //   ),
+      // ),
+      // drawer: Drawer(
+      //   backgroundColor: Colors.white,
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       // Drawer Header
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: ColorsManager.primaryColor, // Use primary color
+      //         ),
+      //         child: Text(
+      //           'Blood Charity Admin',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ),
+
+      //       // Drawer Items
+      //       buildDrawerItem(Icons.person, 'user_requests'.tr(), () {
+      //         // Add navigation logic for user requests
+      //       }),
+      //       buildDrawerItem(Icons.favorite, 'pending_donor_requests'.tr(), () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //             builder: (context) => const TotalPendingRequests(),
+      //           ),
+      //         );
+      //       }),
+      //       buildDrawerItem(Icons.report, 'view_reports'.tr(), () {
+      //         // Add navigation logic for reports
+      //       }),
+      //       buildDrawerItem(Icons.settings, 'settings'.tr(), () {
+      //         // Add navigation logic for settings
+      //       }),
+
+      //       // Divider
+      //       const Divider(
+      //         color: Colors.grey, // Use a subtle color for the divider
+      //         thickness: 1,
+      //         height: 20,
+      //       ),
+
+      //       // Welcome Message Section
+      //       const Padding(
+      //         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             Text(
+      //               'مرحباً بكم جميعاً',
+      //               style: TextStyle(
+      //                 fontSize: 18,
+      //                 fontWeight: FontWeight.bold,
+      //                 color: ColorsManager.primaryColor, // Use primary color
+      //               ),
+      //             ),
+      //             SizedBox(height: 8), // Spacing
+      //             Text(
+      //               'في بيتكم الثاني كلية الهندسة جامعة المنصورة لمناقشة زملاء الغد في مشروعهم',
+      //               style: TextStyle(
+      //                 fontSize: 14,
+      //                 color: Colors.grey, // Use a secondary color
+      //               ),
+      //             ),
+      //             SizedBox(height: 16), // Spacing
+      //             Text(
+      //               'كل الشكر لجميع الأشخاص الذين شاركوا في إنتاج هذا المشروع، ونطمح أن يكون نال إعجابكم جميعاً. ممتنين لمجهود وثقة أساتذتنا الأعزاء.',
+      //               style: TextStyle(
+      //                 fontSize: 14,
+      //                 color: Colors.grey, // Use a secondary color
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
+            // Drawer Header
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: ColorsManager.primaryColor,
+                color: ColorsManager.primaryColor, // Use primary color
               ),
               child: Text(
                 'Blood Charity Admin',
@@ -50,21 +172,61 @@ class HomeDashboardView extends StatelessWidget {
                 ),
               ),
             ),
+
+            // Drawer Items
             buildDrawerItem(Icons.person, 'user_requests'.tr(), () {
-              // Add navigation logic if needed
+              _showFeatureComingSoon(context); // Show message
             }),
             buildDrawerItem(Icons.favorite, 'pending_donor_requests'.tr(), () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TotalPendingRequests()));
+              _showFeatureComingSoon(context); // Show message
             }),
             buildDrawerItem(Icons.report, 'view_reports'.tr(), () {
-              // Add navigation logic for reports
+              _showFeatureComingSoon(context); // Show message
             }),
             buildDrawerItem(Icons.settings, 'settings'.tr(), () {
-              // Add navigation logic for settings
+              _showFeatureComingSoon(context); // Show message
             }),
+
+            // Divider
+            const Divider(
+              color: Colors.grey, // Use a subtle color for the divider
+              thickness: 1,
+              height: 20,
+            ),
+
+            // Welcome Message Section
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'مرحباً بكم جميعاً',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: ColorsManager.primaryColor, // Use primary color
+                    ),
+                  ),
+                  SizedBox(height: 8), // Spacing
+                  Text(
+                    'في بيتكم الثاني كلية الهندسة جامعة المنصورة لمناقشة زملاء الغد في مشروعهم',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey, // Use a secondary color
+                    ),
+                  ),
+                  SizedBox(height: 16), // Spacing
+                  Text(
+                    'كل الشكر لجميع الأشخاص الذين شاركوا في إنتاج هذا المشروع، ونطمح أن يكون نال إعجابكم جميعاً. ممتنين لمجهود وثقة أساتذتنا الأعزاء.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey, // Use a secondary color
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -128,4 +290,22 @@ class HomeDashboardView extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showFeatureComingSoon(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: const Text(
+        'هذه الخاصية غير متوفرة حالياً، سوف يتم العمل على هذه الخاصية في المرحلة القادمة (الترم الثاني)',
+        style: TextStyle(fontSize: 16),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: ColorsManager.primaryColor, // Use primary color
+      duration: const Duration(seconds: 3), // Display for 3 seconds
+      behavior: SnackBarBehavior.floating, // Make it floating
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8), // Rounded corners
+      ),
+    ),
+  );
 }
