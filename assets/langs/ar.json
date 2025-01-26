@@ -7,6 +7,7 @@
   "requests_details": "تفاصيل الطلبات",
   "donors_details": "تفاصيل المتبرعين",
   "reports": "التقارير",
+  "Total_Donor_Requests": "إجمالي طلبات المتبرعين",
   "all_donors": "جميع المتبرعين",
   "donors_blocked": "المتبرعين المحظورون",
   "users_info": "معلومات المستخدمين",
@@ -14,7 +15,14 @@
   "pending_donation_requests": "طلبات التبرع المعلقة",
   "verified_donors_list": "قائمة المتبرعين المعتمدين",
   "user_accounts": "حسابات المستخدمين",
-  "change_user_status": "تغيير حالة المستخدم",
+  "change_user_status": "تغيير حالة المستخدم",  "search_by_name_blood_type_or_city": "ابحث بالاسم، فصيلة الدم، أو المدينة" ,
+
+  "blood_type": "فصيلة الدم",
+  "city": "المدينة",
+  "contact_number": "رقم الاتصال",
+  "status": "الحالة",
+  "unknown": "غير معروف",
+
   "blocked_users": "المستخدمون المحظورون",
   "total_rejacted_requests": "إجمالي الطلبات المرفوضة",
   "allowed_users": "المستخدمون المسموح لهم"

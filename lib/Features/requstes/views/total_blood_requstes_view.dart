@@ -1,5 +1,6 @@
 import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/genratPDF.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -32,9 +33,9 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
       child: Card(
         color: ColorsManager.buttonColor,
         child: ListTile(
-          title: const Text(
-            'Total Donor Requests',
-            style: TextStyle(color: Colors.white),
+          title: Text(
+            'Total_Donor_Requests'.tr(),
+            style: const TextStyle(color: Colors.white),
           ),
           trailing: Text(
             '$totalRequests',
@@ -48,6 +49,7 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
   Widget _buildRequestCard(
       QueryDocumentSnapshot request, Map<String, dynamic> requestData) {
     return Card(
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
       child: ListTile(
         title: Text(
@@ -97,22 +99,50 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text('Blood Type: ${requestData['bloodType'] ?? 'Unknown'}'),
-                Text('City: ${requestData['address'] ?? 'Unknown'}'),
-                Text('Contact Number: ${requestData['contact'] ?? 'N/A'}'),
-                Text('Status: ${requestData['status'] ?? 'Unknown'}'),
+                // Text('Blood Type: ${requestData['bloodType'] ?? 'Unknown'}'),
+                // Text('City: ${requestData['address'] ?? 'Unknown'}'),
+                // Text('Contact Number: ${requestData['contact'] ?? 'N/A'}'),
+                // Text('Status: ${requestData['status'] ?? 'Unknown'}'),
+                Text(
+                  '${'blood_type'.tr()}: ${requestData['bloodType'] ?? 'unknown'.tr()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
+                Text(
+                  '${'city'.tr()}: ${requestData['address'] ?? 'unknown'.tr()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
+                Text(
+                  '${'contact_number'.tr()}: ${requestData['contact'] ?? 'N/A'}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
+                Text(
+                  '${'status'.tr()}: ${requestData['status'] ?? 'unknown'.tr()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
               ],
             ),
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.edit, color: Colors.blue),
-              onPressed: () {
-                Navigator.pop(context);
-                _editRequest(context, request.id, requestData);
-              },
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.edit, color: Colors.blue),
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //       _editRequest(context, request.id, requestData);
+          //     },
+          //   ),
+          // ],
         );
       },
     );
@@ -177,7 +207,7 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
       child: TextField(
         onChanged: (value) => setState(() => searchQuery = value.toLowerCase()),
         decoration: InputDecoration(
-          labelText: 'Search by name, blood type, or city',
+          labelText: 'search_by_name_blood_type_or_city'.tr(), // Localized key
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
         ),
@@ -210,6 +240,7 @@ class TotalBloodRequestsViewState extends State<TotalBloodRequestsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         actions: [
           IconButton(
