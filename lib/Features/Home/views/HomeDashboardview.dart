@@ -1,6 +1,7 @@
 import 'package:adminbloodv2/Features/donners/widgets/CoustomDonorsDetailsSection.dart';
 import 'package:adminbloodv2/Features/reports/widgets/CoustomReportsSection.dart';
 import 'package:adminbloodv2/Features/requstes/widgets/CoustomRequestsDetailsSection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:adminbloodv2/Features/donners/views/total_pending_requests.dart';
@@ -66,49 +67,49 @@ class HomeDashboardView extends StatelessWidget {
           ],
         ),
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            Divider(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const Divider(),
+            const SizedBox(height: 20),
             Text(
-              'Requests Details',
-              style: TextStyle(
+              'Requests Details'.tr(),
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
-            CoustomRequestsDetailsSection(),
-            SizedBox(
+            const SizedBox(height: 20),
+            const CoustomRequestsDetailsSection(),
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
-            SizedBox(height: 20),
-            Text(
+            const Divider(),
+            const SizedBox(height: 20),
+            const Text(
               'Donors Details',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
-            CoustomDonorsDetailsSection(),
-            SizedBox(height: 20),
-            Divider(),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const CoustomDonorsDetailsSection(),
+            const SizedBox(height: 20),
+            const Divider(),
+            const SizedBox(height: 20),
+            const Text(
               'Reports',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
-            ReportsChartsSection()
+            const SizedBox(height: 20),
+            const ReportsChartsSection()
           ],
         ),
       ),
