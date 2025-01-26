@@ -19,11 +19,51 @@
 
   "blood_type": "فصيلة الدم",
   "city": "المدينة",
-  "contact_number": "رقم الاتصال",
+  "Total_Pending_Donor_Requests": "إجمالي طلبات المتبرعين المعلقة",
+  "contact_number": "رقم الاتصال", "donorDetails": "تفاصيل المتبرع",
+  "address": "العنوان: ",
+
+
+
+  "age": "العمر",
+  "all_available_donors": "جميع المتبرعين المتاحين",
+  "gender": "الجنس",
+  "hospitalName": "اسم المستشفى",
+  "medicalConditions": "الحالات الطبية",
+  "name": "الاسم",
+  "nextDonationDate": "تاريخ التبرع القادم",
+  "notes": "ملاحظات",
+  "units": "الوحدات",
+  "none": "لا يوجد",
+  "nA": "غير متاح",
+
+  "bloodType": "فصيلة الدم: ",
+  "dob": "تاريخ الميلاد: ",
+  "allergies": "الحساسية: ",
+  "diagnosedConditions": "الحالات المشخصة: ",
+  "height": "الطول: ",
+  "weight": "الوزن: ",
+  "noName": "لا اسم",
+
+  "lastDonationDate": "تاريخ التبرع الأخير: ",
+  "contactNumber": "رقم الهاتف: ",
   "status": "الحالة",
   "unknown": "غير معروف",
-
   "blocked_users": "المستخدمون المحظورون",
   "total_rejacted_requests": "إجمالي الطلبات المرفوضة",
   "allowed_users": "المستخدمون المسموح لهم"
+,
+
+
+"contact": "Contact",
+"lastDonation": "Last Donation"
+
+
+
+
+
+
+
+
+
 }

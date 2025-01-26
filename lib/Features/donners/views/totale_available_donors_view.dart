@@ -2,6 +2,7 @@ import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/Features/donners/widgets/donor_card.dart';
 import 'package:adminbloodv2/Features/donners/widgets/donor_dialog.dart';
 import 'package:adminbloodv2/Features/donners/widgets/donor_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -61,9 +62,9 @@ class _TotaleAvailableDonorsViewState extends State<TotaleAvailableDonorsView> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
         ),
         backgroundColor: ColorsManager.primaryColor,
-        title: const Text(
-          'All Available Donors',
-          style: TextStyle(
+        title: Text(
+          'all_available_donors'.tr(),
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -76,7 +77,7 @@ class _TotaleAvailableDonorsViewState extends State<TotaleAvailableDonorsView> {
               onChanged: (value) =>
                   setState(() => searchQuery = value.toLowerCase()),
               decoration: InputDecoration(
-                labelText: 'Search by name or blood type',
+                labelText: 'search_by_name_blood_type_or_city'.tr(),
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),

@@ -1,6 +1,7 @@
 import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -49,7 +50,7 @@ class _TotalPendingRequestsState extends State<TotalPendingRequests> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Edit Donor Details'),
+          title: Text('Edit Donor_Details'.tr()),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -114,9 +115,9 @@ class _TotalPendingRequestsState extends State<TotalPendingRequests> {
             color: Colors.white,
           ),
         ),
-        title: const Text(
-          'Pending Donor Requests',
-          style: TextStyle(
+        title: Text(
+          'Total_Pending_Donor_Requests'.tr(),
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -133,7 +134,9 @@ class _TotalPendingRequestsState extends State<TotalPendingRequests> {
                 });
               },
               decoration: InputDecoration(
-                labelText: 'Search by name, blood type, or city',
+                labelText:
+                    'search_by_name_blood_type_or_city'.tr(), // Localized key
+
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -180,9 +183,9 @@ class _TotalPendingRequestsState extends State<TotalPendingRequests> {
                       child: Card(
                         color: ColorsManager.buttonColor, // Maroon
                         child: ListTile(
-                          title: const Text(
-                            'Total Pending Donor Requests',
-                            style: TextStyle(color: Colors.white),
+                          title: Text(
+                            'Total_Pending_Donor_Requests'.tr(),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           trailing: Text(
                             '$totalPendingDonorRequests',
@@ -221,64 +224,98 @@ class _TotalPendingRequestsState extends State<TotalPendingRequests> {
                             return Card(
                               margin: const EdgeInsets.symmetric(vertical: 5.0),
                               child: ListTile(
-                                title: Text(donorData['fullName'] ?? 'No Name',
-                                    style: const TextStyle(
-                                      color: ColorsManager.primaryTextColor,
-                                    )),
+                                title: Text(
+                                  donorData['fullName'] ?? 'noName'.tr(),
+                                  style: const TextStyle(
+                                    color: ColorsManager.primaryTextColor,
+                                  ),
+                                ),
                                 subtitle: Text(
-                                  'Blood Type: ${donorData['bloodType'] ?? 'Unknown'}\n'
-                                  'City: ${donorData['city'] ?? 'Unknown'}',
+                                  '${'bloodType'.tr()}: ${donorData['bloodType'] ?? 'Unknown'}\n${'city'.tr()}: ${donorData['city'] ?? 'Unknown'}',
                                   style: const TextStyle(
                                     color: ColorsManager.secondaryTextColor,
                                   ),
                                 ),
                                 onTap: () {
-                                  // Show detailed information dialog on tap
                                   showDialog(
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
                                         title: Text(donorData['fullName'] ??
-                                            'Donor Details'),
+                                            'donorDetails'.tr()),
                                         content: SingleChildScrollView(
                                           child: ListBody(
                                             children: [
+                                              // Address
                                               Text(
-                                                  'Address: ${donorData['address'] ?? 'N/A'}'),
+                                                  '${'address'.tr()}: ${donorData['address'] ?? 'N/A'}'),
+
+                                              // Blood Type
                                               Text(
-                                                  'Blood Type: ${donorData['bloodType'] ?? 'Unknown'}'),
+                                                  '${'bloodType'.tr()}: ${donorData['bloodType'] ?? 'Unknown'}'),
+
+                                              // City
                                               Text(
-                                                  'City: ${donorData['city'] ?? 'Unknown'}'),
+                                                  '${'city'.tr()}: ${donorData['city'] ?? 'Unknown'}'),
+
+                                              // Date of Birth
                                               Text(
-                                                  'Date of Birth: $formattedDateOfBirth'),
+                                                  '${'dob'.tr()}: ${formattedDateOfBirth ?? 'Unknown'}'),
+
+                                              // Allergies
                                               Text(
-                                                  'Allergies: ${donorData['allergyDetails'] ?? 'None'}'),
+                                                  '${'allergies'.tr()}: ${donorData['allergyDetails'] ?? 'None'}'),
+
+                                              // Diagnosed Conditions
                                               Text(
-                                                  'Diagnosed Conditions: ${donorData['diagnosedConditions']?.join(', ') ?? 'None'}'),
+                                                  '${'diagnosedConditions'.tr()}: ${donorData['diagnosedConditions']?.join(', ') ?? 'None'}'),
+
+                                              // Height
                                               Text(
-                                                  'Height: ${donorData['height'] ?? 'Unknown'} cm'),
+                                                  '${'height'.tr()}: ${donorData['height'] ?? 'Unknown'} cm'),
+
+                                              // Weight
                                               Text(
-                                                  'Weight: ${donorData['weight'] ?? 'Unknown'} kg'),
+                                                  '${'weight'.tr()}: ${donorData['weight'] ?? 'Unknown'} kg'),
+
+                                              // Last Donation Date
                                               Text(
-                                                  'Last Donation Date: $formattedLastDonationDate'),
+                                                  '${'lastDonationDate'.tr()}: ${formattedLastDonationDate ?? 'Unknown'}'),
+
+                                              // Contact Number
                                               Text(
-                                                  'Contact Number: ${donorData['phoneNumber'] ?? 'N/A'}'),
+                                                  '${'contactNumber'.tr()}: ${donorData['contact'] ?? 'N/A'}'),
+
+                                              // Age
+                                              Text(
+                                                  '${'age'.tr()}: ${donorData['age'] ?? 'Unknown'}'),
+
+                                              // Gender
+                                              Text(
+                                                  '${'gender'.tr()}: ${donorData['gender'] ?? 'Unknown'}'),
+
+                                              // Hospital Name
+                                              Text(
+                                                  '${'hospitalName'.tr()}: ${donorData['hospitalName'] ?? 'Unknown'}'),
+
+                                              // Medical Conditions
+                                              Text(
+                                                  '${'medicalConditions'.tr()}: ${donorData['medicalConditions'] ?? 'None'}'),
+
+                                              // Name
+                                              Text(
+                                                  '${'name'.tr()}: ${donorData['name'] ?? 'Unknown'}'),
+
+                                              // Notes
+                                              Text(
+                                                  '${'notes'.tr()}: ${donorData['notes'] ?? 'None'}'),
+
+                                              // Units
+                                              Text(
+                                                  '${'units'.tr()}: ${donorData['units'] ?? 'Unknown'}'),
                                             ],
                                           ),
                                         ),
-                                        actions: [
-                                          IconButton(
-                                            icon: const Icon(Icons.edit,
-                                                color:
-                                                    ColorsManager.buttonColor),
-                                            onPressed: () {
-                                              Navigator.pop(
-                                                  context); // Close details dialog
-                                              editRequest(context, doc.id,
-                                                  donorData); // Open edit dialog
-                                            },
-                                          ),
-                                        ],
                                       );
                                     },
                                   );
