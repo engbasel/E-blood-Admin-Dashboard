@@ -4,7 +4,7 @@ class FirestoreConstants {
   static const String verifiedDonorsCollection = 'donerRequest';
   static const String rejectedDonorsCollection = 'rejected_donors';
   static const String userAccountsCollection = 'user_accounts';
-  static const String adminControlCollection = 'admin_control';
+  static const String adminControlCollection = 'users';
   static const String notificationsCollection = 'notifications';
   static const String sessionsCollection = 'sessions';
   static const String userTokensCollection = 'user_tokens';

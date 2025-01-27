@@ -49,19 +49,6 @@ class CoustomRequestsDetailsSection extends StatelessWidget {
             },
           ),
           buildSummarySection(
-            status: 'accepted',
-            context,
-            'verified_donors_list'.tr(), // Localized key
-            FirestoreConstants.bloodRequestsCollection,
-            () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const TotaleAvailableDonorsView();
-                },
-              ));
-            },
-          ),
-          buildSummarySection(
             status: 'rejected',
             context,
             'total_rejacted_requests'.tr(), // Localized key

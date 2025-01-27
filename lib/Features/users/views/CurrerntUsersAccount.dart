@@ -2,6 +2,7 @@ import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:adminbloodv2/Features/users/views/UserDetailScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CurrentUsersAccount extends StatelessWidget {
@@ -29,9 +30,9 @@ class CurrentUsersAccount extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        title: const Text(
-          'Current Users Account',
-          style: TextStyle(
+        title: Text(
+          'Current_Users_Account'.tr(),
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),

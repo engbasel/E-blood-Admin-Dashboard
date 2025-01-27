@@ -3,7 +3,7 @@
   "user_requests": "طلبات المستخدمين",
   "pending_donor_requests": "طلبات المتبرعين المعلقة",
   "view_reports": "عرض التقارير",
-  "settings": "الإعدادات",
+  
   "requests_details": "تفاصيل الطلبات",
   "donors_details": "تفاصيل المتبرعين",
   "reports": "التقارير",
@@ -25,7 +25,9 @@
 
 
 
+  "Current_Users_Account": "حسابات المستخدمين الحالية",
   "age": "العمر",
+  "User_Details": "تفاصيل المستخدم",
   "all_available_donors": "جميع المتبرعين المتاحين",
   "gender": "الجنس",
   "hospitalName": "اسم المستشفى",
@@ -37,7 +39,7 @@
   "none": "لا يوجد",
   "nA": "غير متاح",
 
-  "bloodType": "فصيلة الدم: ",
+
   "dob": "تاريخ الميلاد: ",
   "allergies": "الحساسية: ",
   "diagnosedConditions": "الحالات المشخصة: ",

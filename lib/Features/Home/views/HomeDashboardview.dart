@@ -90,69 +90,6 @@ class HomeDashboardView extends StatelessWidget {
       //         ),
       //       ),
 
-      //       // Drawer Items
-      //       buildDrawerItem(Icons.person, 'user_requests'.tr(), () {
-      //         // Add navigation logic for user requests
-      //       }),
-      //       buildDrawerItem(Icons.favorite, 'pending_donor_requests'.tr(), () {
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(
-      //             builder: (context) => const TotalPendingRequests(),
-      //           ),
-      //         );
-      //       }),
-      //       buildDrawerItem(Icons.report, 'view_reports'.tr(), () {
-      //         // Add navigation logic for reports
-      //       }),
-      //       buildDrawerItem(Icons.settings, 'settings'.tr(), () {
-      //         // Add navigation logic for settings
-      //       }),
-
-      //       // Divider
-      //       const Divider(
-      //         color: Colors.grey, // Use a subtle color for the divider
-      //         thickness: 1,
-      //         height: 20,
-      //       ),
-
-      //       // Welcome Message Section
-      //       const Padding(
-      //         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             Text(
-      //               'مرحباً بكم جميعاً',
-      //               style: TextStyle(
-      //                 fontSize: 18,
-      //                 fontWeight: FontWeight.bold,
-      //                 color: ColorsManager.primaryColor, // Use primary color
-      //               ),
-      //             ),
-      //             SizedBox(height: 8), // Spacing
-      //             Text(
-      //               'في بيتكم الثاني كلية الهندسة جامعة المنصورة لمناقشة زملاء الغد في مشروعهم',
-      //               style: TextStyle(
-      //                 fontSize: 14,
-      //                 color: Colors.grey, // Use a secondary color
-      //               ),
-      //             ),
-      //             SizedBox(height: 16), // Spacing
-      //             Text(
-      //               'كل الشكر لجميع الأشخاص الذين شاركوا في إنتاج هذا المشروع، ونطمح أن يكون نال إعجابكم جميعاً. ممتنين لمجهود وثقة أساتذتنا الأعزاء.',
-      //               style: TextStyle(
-      //                 fontSize: 14,
-      //                 color: Colors.grey, // Use a secondary color
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: ListView(

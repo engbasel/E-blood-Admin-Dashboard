@@ -9,7 +9,7 @@ class DonorService {
   // Fetch all donors
   Stream<QuerySnapshot> fetchDonors() {
     return _firestore
-        .collection(FirestoreConstants.bloodRequestsCollection)
+        .collection(FirestoreConstants.donorRequestsCollection)
         .snapshots();
   }
 
@@ -32,10 +32,34 @@ class DonorService {
 }
 
 class DonorFields {
+  // Personal Information
   static const String name = 'name';
-  static const String address = 'address';
-  static const String contact = 'contact';
+  static const String age = 'age';
+  static const String gender = 'gender';
   static const String bloodType = 'bloodType';
-  static const String hospitalName = 'hospitalName';
+  static const String address = 'address';
+  static const String city = 'city';
+  static const String contact = 'contact';
+  static const String idCard = 'idCard';
+  static const String uId = 'uId';
+
+  // Medical Information
+  static const String medicalConditions = 'medicalConditions';
+  static const String allergyDetails = 'allergyDetails';
+  static const String height = 'height';
+  static const String weight = 'weight';
+  static const String units = 'units';
+
+  // Donation Information
+  static const String donationType = 'donationType';
+  static const String lastDonationDate = 'lastDonationDate';
   static const String lastRequestDate = 'lastRequestDate';
+  static const String nextDonationDate = 'nextDonationDate';
+
+  // Hospital Information
+  static const String hospitalName = 'hospitalName';
+
+  // Additional Information
+  static const String notes = 'notes';
+  static const String distance = 'distance';
 }

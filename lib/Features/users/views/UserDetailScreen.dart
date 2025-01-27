@@ -1,6 +1,7 @@
 import 'package:adminbloodv2/Core/manger/ColorsManager.dart';
 import 'package:adminbloodv2/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailScreen extends StatelessWidget {
@@ -22,9 +23,9 @@ class UserDetailScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        title: const Text(
-          'User Details',
-          style: TextStyle(
+        title: Text(
+          'User_Details'.tr(),
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -99,17 +100,7 @@ class UserDetailScreen extends StatelessWidget {
                   value: userData['location'] ?? 'N/A',
                   icon: Icons.location_on,
                 ),
-                // Patient Name Section
 
-                // Photo URL Section
-                _buildInfoCard(
-                  title: 'Photo URL',
-                  value: userData['photoUrl'] ?? 'N/A',
-                  icon: Icons.photo,
-                ),
-
-                Image.network(userData['photoUrl'] ?? 'N/A'),
-                // User ID Section
                 _buildInfoCard(
                   title: 'User ID',
                   value: userData['uId'] ?? 'N/A',

@@ -20,7 +20,7 @@ class CoustomrUserssDetailsSection extends StatelessWidget {
           buildSummarySection(
             context,
             'user_accounts'.tr(), // Localized key
-            FirestoreConstants.userAccountsCollection,
+            FirestoreConstants.adminControlCollection,
             () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
@@ -42,9 +42,12 @@ class CoustomrUserssDetailsSection extends StatelessWidget {
             },
           ),
           buildSummarySection(
-            context,
+            context, status: 'userStat',
             'blocked_users'.tr(), // Localized key
-            FirestoreConstants.rejectedDonorsCollection,
+            // FirestoreConstants.rejectedDonorsCollection,
+
+            FirestoreConstants.adminControlCollection,
+
             () {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {

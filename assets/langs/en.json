@@ -19,6 +19,7 @@
 
 
   "age": "Age",
+  "User_Details": "User Details",
   "gender": "Gender",
   "hospitalName": "Hospital Name",
   "medicalConditions": "Medical Conditions",
@@ -27,6 +28,7 @@
   "notes": "Notes",
   "units": "Units",
   "none": "None",
+  "Current_Users_Account": " Current Users Account",
   "nA": "N/A",
 
 
